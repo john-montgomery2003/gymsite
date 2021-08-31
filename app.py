@@ -16,7 +16,7 @@ account_sid = os.environ.get('account_sid')
 auth_token = os.environ.get('auth_token')
 msgsid = os.environ.get('msgsid')
 stripeAPI = os.environ.get('stripeAPI')
-
+emailpassword = os.environ.get('emailpassword')
 
 
 context = ssl.create_default_context()
@@ -218,7 +218,7 @@ def confirm_booking(code):
 
 
 
-    yag = yagmail.SMTP("test134832418524@gmail.com", password='OlexI123')
+    yag = yagmail.SMTP("test134832418524@gmail.com", password=emailpassword)
     yag.send(
         to=receiver,
         subject="PT Session Booking",
