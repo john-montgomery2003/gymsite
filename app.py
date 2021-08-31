@@ -8,13 +8,24 @@ import yagmail
 from twilio.rest import Client
 import smtplib, ssl
 
+from dotenv import load_dotenv
+
+load_dotenv()
+
+account_sid = os.environ.get('account_sid')
+auth_token = os.environ.get('auth_token')
+msgsid = os.environ.get('msgsid')
+stripeAPI = os.environ.get('stripeAPI')
+
+
+
 context = ssl.create_default_context()
 
-account_sid = 'AC4f395767e736798ae12ed57ae535af74'
-auth_token = '689171051ce15b7e5ab2ccb81da84feb'
+
+
 client = Client(account_sid, auth_token)
 
-stripe.api_key = 'sk_test_51JSoS0Fzpk13Cd9ohUal1Rns0vCOrQEj4TnaWg9H8nxzF4JMKyNMAlCn0HUVRKTnuZIPr207nG5vy3HsXDimV2iq003wOCl8zR'
+stripe.api_key = stripeAPI
 app = Flask(__name__)
 con = sqlite3.connect('dev.db', check_same_thread=False)
 
@@ -194,7 +205,7 @@ def confirm_booking(code):
 
 
     message = client.messages.create(
-        messaging_service_sid='MG3f0b06cfc3627932c09a1fd1d3f674c3',
+        messaging_service_sid=msgsid,
         body=f'Hello, {name}. This message is to confirm your booking at {time} on the {date}.',
         to=phone
     )
