@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Booking</title>
+</head>
+
+<body>
+<h1>{{ title }}</h1>
+<h3>{{ "£%.2f"|format(price/100) }}</h3>
+<p>{{ desc }}</p>
+<form action="/stripe-payment" method="POST">
+<input type="text" name="name"placeholder="example">
+<input type="email" name="email" placeholder="john@example.com">
+<input type="text" name="phone" placeholder="07444431413">
+<input type="text" name="notes" placeholder="notes">
+<select name="time">
+
+    {% for item in avaliable %}
+
+        <option value="{{ item[1] }}">{{ item[1] }}</option>
+
+    {% endfor %}
+</select>
+
+<input type="hidden" name="type" value="{{ avaliable[0][2] }}">
+<button type="submit" >Confirm</button>
+</form>
+</body>
+</html>
